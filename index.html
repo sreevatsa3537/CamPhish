@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RedCall Pro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://kit.fontawesome.com/c4c45dfab4.css">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  background: black;
+  color: white;
+}
+
+/* ===== Animated Background ===== */
+#bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+/* ===== Layout ===== */
+.app {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr 90px;
+}
+
+.stage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 30px;
+}
+
+/* ===== Video Boxes ===== */
+.box {
+  width: 420px;
+  height: 260px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 60px rgba(255,0,0,0.4);
+  overflow: hidden;
+  position: relative;
+  animation: float 6s ease-in-out infinite;
+}
+
+video, canvas#robot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.label {
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* ===== Controls ===== */
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(10px);
+}
+
+.control {
+  text-align: center;
+  cursor: pointer;
+}
+
+.control i {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.end {
+  background: crimson;
+  padding: 12px 26px;
+  border-radius: 10px;
+}
+
+/* ===== Animations ===== */
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="bg"></canvas>
+
+<div class="app">
+  <div class="stage">
+    <div class="box">
+      <video id="localVideo" autoplay muted playsinline></video>
+      <div class="label">You</div>
+    </div>
+
+    <div class="box">
+      <canvas id="robot"></canvas>
+      <div class="label">AI Participant</div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="control"><i class="fas fa-microphone"></i><div>Mute</div></div>
+    <div class="control"><i class="fas fa-video"></i><div>Video</div></div>
+    <div class="control"><i class="fas fa-users"></i><div>People</div></div>
+    <div class="control end">End</div>
+  </div>
+</div>
+
+<script>
+/* ===== CAMERA (LOCAL ONLY) ===== */
+navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+  .then(stream => {
+    document.getElementById("localVideo").srcObject = stream;
+    setupAudio(stream);
+  });
+
+/* ===== AUDIO REACTIVE ===== */
+let volume = 0;
+function setupAudio(stream){
+  const ctx = new AudioContext();
+  const analyser = ctx.createAnalyser();
+  const source = ctx.createMediaStreamSource(stream);
+  source.connect(analyser);
+  analyser.fftSize = 256;
+  const data = new Uint8Array(analyser.frequencyBinCount);
+
+  function read(){
+    analyser.getByteFrequencyData(data);
+    volume = data.reduce((a,b)=>a+b,0)/data.length;
+    requestAnimationFrame(read);
+  }
+  read();
+}
+
+/* ===== BACKGROUND PARTICLES ===== */
+const bg = document.getElementById("bg");
+const bctx = bg.getContext("2d");
+bg.width = innerWidth;
+bg.height = innerHeight;
+
+let particles = Array.from({length: 100}, () => ({
+  x: Math.random()*bg.width,
+  y: Math.random()*bg.height,
+  r: Math.random()*2+1,
+  v: Math.random()*0.6+0.2
+}));
+
+function drawBG(){
+  bctx.clearRect(0,0,bg.width,bg.height);
+  particles.forEach(p=>{
+    p.y += p.v;
+    if(p.y > bg.height) p.y = 0;
+    bctx.fillStyle = "rgba(255,0,0,0.45)";
+    bctx.beginPath();
+    bctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    bctx.fill();
+  });
+  requestAnimationFrame(drawBG);
+}
+drawBG();
+
+/* ===== ROBOT ANIMATION ===== */
+const rc = document.getElementById("robot");
+const rctx = rc.getContext("2d");
+rc.width = 420;
+rc.height = 260;
+
+let t = 0;
+function robot(){
+  rctx.clearRect(0,0,rc.width,rc.height);
+
+  let pulse = 1 + volume * 0.003;
+
+  rctx.fillStyle = "#ff2b2b";
+  rctx.beginPath();
+  rctx.arc(210,130,55*pulse,0,Math.PI*2);
+  rctx.fill();
+
+  rctx.fillStyle = "#000";
+  rctx.beginPath();
+  rctx.arc(195,120,6,0,Math.PI*2);
+  rctx.arc(225,120,6,0,Math.PI*2);
+  rctx.fill();
+
+  t += 0.05;
+  requestAnimationFrame(robot);
+}
+robot();
+
+window.onresize = () => {
+  bg.width = innerWidth;
+  bg.height = innerHeight;
+};
+</script>
+
+</body>
+</html>
